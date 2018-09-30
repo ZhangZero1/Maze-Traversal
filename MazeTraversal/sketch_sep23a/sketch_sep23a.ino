@@ -35,6 +35,20 @@ class Motor{
     digitalWrite(NegPin, LOW); 
   }
 };
+/*
+class GradedMotor(){
+  public:
+  Motor motor;
+  double dutyCycle;
+  
+  GradedMotor(Motor* motor){
+    this->motor = motor;
+  }
+  
+  void setVelocity(double value){
+    this->dutyCycle = abs(value);
+  }
+};*/
 
 class DriveTrain{
   public:
@@ -69,6 +83,28 @@ class DriveTrain{
     m2->Stop();
   }
 };
+
+/*
+
+class GradedDriveTrain{
+  public:
+  DriveTrain driveTrain;
+  
+  GradedDriveTrain(DriveTrain* driveTrain){
+    this->driveTrain = driveTrain;
+  }
+  
+  
+};
+
+class DriverScheduler{
+  public:
+  DriveTrain driveTrain;
+  
+  DriverScheduler(DriveTrain driveTrain){
+    
+  }
+}*/
 void setup() {
   // put your setup code here, to run once:
   Motor m1(5,6, true);
