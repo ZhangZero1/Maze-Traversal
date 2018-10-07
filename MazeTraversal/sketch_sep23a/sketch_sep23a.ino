@@ -1,3 +1,44 @@
+#include <NewPing.h>
+
+
+
+
+
+
+
+class WallDetector{
+  public:
+  NewPing* lSonar;
+  NewPing* rSonar;
+  NewPing* fSonar;
+
+  const int collisionThreshold = 100;
+
+  WallDetector(NewPing* lSonar, NewPing* rSonar, NewPing* fSonar){
+    this->lSonar = lSonar;
+    this->rSonar = rSonar;
+    this->fSonar = fSonar;
+  }
+
+  bool isLeftCollide(){
+    return lSonar->ping_cm() <= collisionThreshold;
+  }
+
+  bool isRightCollide(){
+    return rSonar->ping_cm() <= collisionThreshold;
+  }
+
+  bool isFrontCollide(){
+    return fSonar->ping_cm() <= collisionThreshold;
+  }
+  
+};
+
+
+
+
+
+
 class Motor{
   public:
   int PosPin;
@@ -105,14 +146,24 @@ class DriverScheduler{
     
   }
 }*/
+
+
+NewPing lSonar(2, 3, 200);
+  NewPing rSonar(70, 80, 90);
+  NewPing fSonar(70, 80, 90);
+
+  WallDetector wallDetector(&lSonar, &rSonar, &fSonar);
+
 void setup() {
   // put your setup code here, to run once:
-  Motor m1(5,6, true);
-  Motor m2(7,8,false);
-  DriveTrain dt(&m1, &m2);
+  //Motor m1(5,6, true);
+  //Motor m2(7,8,false);
+  //DriveTrain dt(&m1, &m2);
+  Serial.begin(9600);      // open the serial port at 9600 bps:
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  Serial.print(wallDetector.isLeftCollide());
 }
