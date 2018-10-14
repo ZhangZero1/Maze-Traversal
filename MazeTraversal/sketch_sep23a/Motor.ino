@@ -1,5 +1,3 @@
-
-
 class Motor{
   public:
   int PosPin;
