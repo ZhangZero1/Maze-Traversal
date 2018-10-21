@@ -124,6 +124,49 @@ class MotorDriver{
   }
 };
 
+class DriveTrain{
+  public:
+  DriveTrain (MotorDriver* motorLeft, MotorDriver* motorRight){}
+  
+}
+
 class BasicDriveTrain{
+    public:
+    MotorDriver* motorLeft;
+    MotorDriver* motorRight;
+
+    BasicDriveTrain (MotorDriver* motorLeft, MotorDriver* motorRight){
+      this->motorLeft = motorLeft;
+      this->motorRight = motorRight;
+    }
+
+    void forward(){
+      motorLeft->setForward();
+      motorRight->setForward();
+    }
+
+    void reverse(){
+      motorLeft->setBackward();
+      motorRight->setBackward();
+    }
+
+    void stopPlease(){
+      motorLeft->setStop()
+      motorRight->setStop();
+    }
+    
+    void turnRight(){
+      motorLeft->setForward();
+      motorRight->setStop();
+    }
+
+    void turnLeft(){
+      motorLeft->setStop();
+      motorRight->setForward();
+    }
+}
+
+class MotorScheduler{
+  public:
   
 }
