@@ -1,4 +1,8 @@
 class MotorProp{
+  /*
+   * Gives Motor pins and flip direction
+   * 
+   */
   public:
   int posPin;
   int negPin;
@@ -24,6 +28,9 @@ class MotorProp{
 }
 
 class MotorState{
+  /*
+   * Handles motor states and velocity
+   */
   public:
   MotorProp* props;
   float velocity;
@@ -40,6 +47,9 @@ class MotorState{
 };
 
 class MotorDriverState{
+  /*
+   * Handles the voltage in each pin for each motor direction state
+   */
   public:
   bool posState;
   bool negState;
@@ -64,6 +74,9 @@ class MotorDriverState{
 };
 
 class MotorDriver{
+  /*
+   * Maintains the Voltage state for the desired direction
+   */
   public:
   MotorProp* props;
   int directionCode;
@@ -110,3 +123,7 @@ class MotorDriver{
     }
   }
 };
+
+class BasicDriveTrain{
+  
+}
