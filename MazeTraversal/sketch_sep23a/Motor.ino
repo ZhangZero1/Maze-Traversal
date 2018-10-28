@@ -68,10 +68,10 @@ class DriveTrain{
   }
   void turnRight(){
     m1->Forward();
-    m2->Stop();
+    m2->Backwards();
   }
   void turnLeft(){
-    m1->Stop();
+    m1->Backwards();
     m2->Forward();
   }
 
