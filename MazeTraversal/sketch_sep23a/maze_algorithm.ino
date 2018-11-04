@@ -1,7 +1,7 @@
-void setup() {
+/*void setup() {
   bool right = false;
   bool left = false;
-  string next;
+  String next;
   
 
   while(right == true) {
@@ -41,7 +41,7 @@ void loop() {
   if
   
 }
-  
+  */
   
  
   

@@ -24,5 +24,18 @@ class WallDetector{
   bool isFrontCollide(){
     return fSonar->ping_cm() <= collisionThreshold;
   }
+
+  int getDistance(String name){
+    if(name == "left"){
+      return lSonar->ping_cm();
+    }
+    else if(name == "right"){
+      return rSonar->ping_cm();
+    }
+    else if(name == "front"){
+      return fSonar->ping_cm();
+    }
+    return -1;
+  }
   
 };
