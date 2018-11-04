@@ -5,7 +5,7 @@ class WallDetector{
   NewPing* rSonar;
   NewPing* fSonar;
 
-  const int collisionThreshold = 100;
+  const int collisionThreshold = 30;
 
   WallDetector(NewPing* lSonar, NewPing* rSonar, NewPing* fSonar){
     this->lSonar = lSonar;
@@ -14,15 +14,15 @@ class WallDetector{
   }
 
   bool isLeftCollide(){
-    return lSonar->ping_cm() <= collisionThreshold;
+    return lSonar->ping_cm() <= collisionThreshold && lSonar->ping_cm() > 0;
   }
 
   bool isRightCollide(){
-    return rSonar->ping_cm() <= collisionThreshold;
+    return rSonar->ping_cm() <= collisionThreshold && rSonar->ping_cm() > 0;
   }
 
   bool isFrontCollide(){
-    return fSonar->ping_cm() <= collisionThreshold;
+    return fSonar->ping_cm() <= collisionThreshold && fSonar->ping_cm() > 0;
   }
 
   int getDistance(String name){

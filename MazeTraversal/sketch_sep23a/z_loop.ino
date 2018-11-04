@@ -2,7 +2,51 @@ int count = 0;
 int trueCount = 0;
 int maxCount = 23;
 
-int turningPhase = -1;
+
+
+class TurnCorrection{
+  public:
+  bool isTurn;
+  bool overrideStop;
+
+  TurnCorrection(){
+    this->isTurn = false;
+    this->overrideStop = false;
+  }
+
+  bool flipTurn(){
+    
+    isTurn = !isTurn;
+    return !isTurn;
+  }
+
+  void setOverrideStop(bool control){
+    this->overrideStop = control;
+  }
+
+  bool correctIt(WallDetector* wallDetector, DriveTrain* dt){ // only from left 
+    if(overrideStop){
+      return false;
+    }
+    if(!isTurn){
+      return flipTurn();
+    }
+    if(wallDetector->isLeftCollide()){
+      // correct left: turn right
+      dt->turnRight();
+    }
+    else if(wallDetector->isFrontCollide() && ! wallDetector->isRightCollide()){
+      // then fix it: turn right
+      dt->turnRight();
+    }else{
+      // turn left
+      dt->turnLeft();
+    }
+    return flipTurn();
+  }
+};
+
+TurnCorrection tc;
 
 void loop() {
   /*
@@ -17,28 +61,13 @@ void loop() {
   */
 
   
-  if(wallDetector.getDistance("front") <= 30 && wallDetector.getDistance("front") > 0){
-    // run away
-    dt.Stop();
-  }
-  else if(wallDetector.getDistance("right") <= 30 && wallDetector.getDistance("right") > 0 && turningPhase==-1 ){
-    // run away
-    dt.turnLeft();
-    if(turningPhase == -1){
-      turningPhase = 1;
+  if(!tc.correctIt(&wallDetector, &dt)){
+    if(wallDetector.isFrontCollide()){
+      dt.Stop();
+      tc.setOverrideStop(true);
+    }else{
+      tc.setOverrideStop(false);
+      dt.goForward();
     }
-    
-  }
-  else if(wallDetector.getDistance("left") <= 30 && wallDetector.getDistance("left") > 0 && turningPhase == -1){
-    // run away
-    dt.turnRight();
-    if(turningPhase == -1){
-      turningPhase = 1;
-    }
-  }
-  else {
-    // stop
-    dt.goForward();
-    turningPhase = -1;
   }
 }
